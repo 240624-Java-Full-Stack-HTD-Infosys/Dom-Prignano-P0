@@ -33,12 +33,16 @@ public class User {
         this.password = password;
     }
 
+    // Login Constructor
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public User() {
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public String getFirstName() { return firstName; }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;

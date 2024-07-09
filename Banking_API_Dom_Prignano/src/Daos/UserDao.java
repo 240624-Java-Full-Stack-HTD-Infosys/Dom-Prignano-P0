@@ -30,23 +30,38 @@ public class UserDao {
         return null;
     }
 
-    // Log into account
-    public void userLogin() {
-
+    // Log into user account
+    public User userLogin(String username, String password) throws SQLException, IOException, ClassNotFoundException {
+        User user = new User();
+        Connection conn = ConnectionUtil.getConnection();
+        try {
+            String sql = "SELECT * FROM users WHERE username = ? AND password = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            pstmt.executeUpdate();
+            ResultSet rS = pstmt.getGeneratedKeys();
+            if (rS.next()) {
+                return new User(user.getUsername(), user.getPassword());
+            }
+        } catch (SQLException ex) {
+            System.out.println("Exception: " + ex.getMessage() + '\n');
+        }
+        return null;
     }
 
     // View user-specific bank accounts
-    public void viewBankAccounts() {
+    public void viewMyBankAccounts(int userId) {
 
     }
 
     // View a transaction history for each of my bank accounts
-    public void viewAccountTransactionHistory() {
+    public void viewMyAccountTransactionHistory() {
 
     }
 
     // Change my user information (name, phone, email, etc.)
-    public void changeUserInformation() {
+    public void changeMyUserInformation() {
 
     }
 }
