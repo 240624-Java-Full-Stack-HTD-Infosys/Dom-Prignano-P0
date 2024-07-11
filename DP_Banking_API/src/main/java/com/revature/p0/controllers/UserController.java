@@ -12,22 +12,21 @@ import java.sql.SQLException;
 
 
 public class UserController { // Overall, the controller receives requests from and returns responses to the client (like Postman).
-    UserService userService;
-    Javalin javalin;
 
-// Postman is part of client that doesn't exist - it simulates.
+    UserService userService; // Service is instantiated so its methods can be referenced.
+    Javalin javalin; // Javalin object functions as a terminal, which clients or client simulations like Postman can connect to.
 
     public UserController(UserService userService, Javalin javalin) {
-        this.javalin = javalin; // Serves as something Postman can connect to
+
+        // Above objects are instantiated in constructor.
+        this.javalin = javalin;
         this.userService = userService;
 
-        // Request handlers
+        // Each request handler tells the javalin object what to do in the event of a certain type of request being made.
         javalin.post("/users", this::registerUser);
         javalin.get("/users", this::getAllUsers);
-        javalin.post("/login", this::logUserIn); // Telling Javalin what to do when the event occurs
+        javalin.post("/login", this::logUserIn);
         javalin.put("/users", this::updateUserInfo);
-
-
 
     }
 
@@ -38,13 +37,13 @@ public class UserController { // Overall, the controller receives requests from 
     }
 
     // Get all users
-    public List<User> getAllUsers(Context ctx) throws SQLException {
-        return userService.getAllUsers(ctx.bodyAsClass(User.class));
+    public Context getAllUsers(Context ctx) {
+        return ctx.json(userService.getAllUsers());
     }
 
     // User login
     public User logUserIn(Context ctx) throws SQLException {
-        LoginDto loginDto = ctx.bodyAsClass(LoginDto.class); // CTX is a wrapper around request and repsonse.
+        LoginDto loginDto = ctx.bodyAsClass(LoginDto.class); // CTX is a wrapper around request and response.
         return userService.logUserIn(loginDto.getUsername(), loginDto.getPassword());
         // Body is the payload - what is being sent or received
         // Converting to an existing class (login dto)
