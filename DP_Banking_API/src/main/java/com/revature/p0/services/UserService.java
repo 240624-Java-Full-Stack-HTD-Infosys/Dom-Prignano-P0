@@ -3,6 +3,7 @@ package com.revature.p0.services;
 import com.revature.p0.daos.UserDao;
 import com.revature.p0.models.User;
 
+import java.util.List; // Needed for getAllUsers method.
 import java.sql.SQLException;
 
 public class UserService {
@@ -18,4 +19,18 @@ public class UserService {
         return userDao.registerUser(user);
     }
 
+    // Get all users
+    public List<User> getAllUsers(User user) {
+        return userDao.getAllUsers();
+    }
+
+    // User login
+    public User logUserIn(String username, String password) throws SQLException {
+        return userDao.getUserByUsername(username);
+    }
+
+    // Update user information
+    public User updateUserInfo(User user) {
+        return userDao.updateUserInfo(user);
+    }
 }
