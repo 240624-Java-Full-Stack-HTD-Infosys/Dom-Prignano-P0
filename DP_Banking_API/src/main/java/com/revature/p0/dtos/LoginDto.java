@@ -10,7 +10,6 @@ public class LoginDto {
         this.username = username;
         this.password = password;
     }
-    // DTOS are models that aren't stored in the database; transient
 
     public String getUsername() {
         return username;

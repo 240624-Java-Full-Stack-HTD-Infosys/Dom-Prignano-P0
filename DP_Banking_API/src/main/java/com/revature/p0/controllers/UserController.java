@@ -1,12 +1,12 @@
-package com.revature.p0.controllers;
+package com.revature.p0.controllers; // Controller is stored in controllers package.
 
-import com.revature.p0.services.UserService;
-import com.revature.p0.models.User;
-import com.revature.p0.dtos.LoginDto;
+import com.revature.p0.services.UserService; // // Required to connect to and reference the Service layer.
+import com.revature.p0.models.User;  // Required to reference user model's various getters and setters, and object instantiation.
+import com.revature.p0.dtos.LoginDto; // Login DTO is needed for login functionality.
 
 import io.javalin.Javalin; // With JDBC, Javalin is needed for client connections to be made.
 import io.javalin.http.Context; // Context objects allow for efficient data transfer across the aforementioned connections.
-import java.sql.SQLException; //
+import java.sql.SQLException; // Required for login exception handling which couldn't be handled elsewhere.
 
 
 public class UserController { // Overall, the controller receives requests from and returns responses to the client (like Postman).
@@ -14,7 +14,7 @@ public class UserController { // Overall, the controller receives requests from 
     UserService userService; // Service is instantiated so its methods can be referenced.
     Javalin javalin; // Javalin object functions as a terminal, which clients or client simulations like Postman can connect to.
 
-    public UserController(UserService userService, Javalin javalin) {
+    public UserController(UserService userService, Javalin javalin) { // Controller constructor provides instantiation for important objects, which are needed for client operation.
 
         // Above objects are instantiated in constructor.
         this.javalin = javalin;
@@ -39,10 +39,9 @@ public class UserController { // Overall, the controller receives requests from 
     }
 
     // User login
-    public User logUserIn(Context ctx) throws SQLException { // SQLException is finally thrown to the JVM. ***
-        LoginDto loginDto = ctx.bodyAsClass(LoginDto.class); // LoginDto is a database-adjacent model ***
-        return userService.logUserIn(loginDto.getUsername());
-        // Converting to an existing class (login dto)
+    public User logUserIn(Context ctx) throws SQLException { // SQLException is finally thrown to the JVM.
+        LoginDto loginDto = ctx.bodyAsClass(LoginDto.class); // LoginDto is a database-adjacent model containing the needed parameters for login.
+        return userService.logUserIn(loginDto.getUsername()); // Converting an instance of LoginDto to Context lets it effectively parameterize logUserIn.
     }
 
     // Update user information
