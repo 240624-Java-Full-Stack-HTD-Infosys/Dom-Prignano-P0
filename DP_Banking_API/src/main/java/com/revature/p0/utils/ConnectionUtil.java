@@ -1,4 +1,4 @@
-package com.revature.p0.utils;
+package com.revature.p0.utils; // Util class is stored in utils package.
 
 import java.io.*;
 import java.sql.*;
@@ -9,7 +9,7 @@ public class ConnectionUtil {
 
     public static Connection getConnection() throws SQLException, IOException, ClassNotFoundException {
 
-        InputStream inputStream = ConnectionUtil.class.getClassLoader().getResourceAsStream("application.properties");
+        InputStream inputStream = ConnectionUtil.class.getClassLoader().getResourceAsStream("application.properties"); // ***
         Properties properties = new Properties();
         properties.load(inputStream);
 

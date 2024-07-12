@@ -1,4 +1,4 @@
-package com.revature.p0.utils;
+package com.revature.p0.utils; // Util class is stored in utils package.
 
 import com.revature.p0.controllers.UserController;
 import com.revature.p0.daos.UserDao;
@@ -30,5 +30,4 @@ public class ServerUtil {
         UserController userController = new UserController(userService, api);
         return api;
     }
-
 }

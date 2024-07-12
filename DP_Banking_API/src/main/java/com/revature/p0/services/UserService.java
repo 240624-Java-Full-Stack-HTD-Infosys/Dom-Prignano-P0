@@ -1,12 +1,12 @@
-package com.revature.p0.services;
+package com.revature.p0.services; // Service is stored in services package.
 
-import com.revature.p0.daos.UserDao;
-import com.revature.p0.models.User;
+import com.revature.p0.daos.UserDao; // Required to connect to and reference the DAO layer.
+import com.revature.p0.models.User; // Required to reference
 
 import java.util.List; // Needed for getAllUsers method.
-import java.sql.SQLException;
+import java.sql.SQLException; // Needed to throw possible login exceptions.
 
-public class UserService {
+public class UserService { // Overall, the service contains business logic, and serves as an intermediary between
 
     // Class setup
     UserDao userDao;
@@ -15,7 +15,7 @@ public class UserService {
     }
 
     // User registration
-    public User registerUser(User user) throws SQLException {
+    public User registerUser(User user) {
         return userDao.registerUser(user);
     }
 
@@ -25,7 +25,7 @@ public class UserService {
     }
 
     // User login
-    public User logUserIn(String username, String password) throws SQLException {
+    public User logUserIn(String username) throws SQLException {
         return userDao.getUserByUsername(username);
     }
 
