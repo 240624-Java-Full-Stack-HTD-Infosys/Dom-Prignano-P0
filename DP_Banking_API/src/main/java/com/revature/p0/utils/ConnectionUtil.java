@@ -5,7 +5,7 @@ import java.sql.*; // SQL interaction is fundamental to this application's funct
 import java.util.Properties; // Credentials from application.properties are needed to establish a connection with the database.
 
 
-public class ConnectionUtil { // Used to establish a connection to the SQL database.
+public class ConnectionUtil { // Used to establish a connection to the SQL database.   
 
     public static Connection getConnection() throws SQLException, IOException, ClassNotFoundException { // Connection getter to be used in ServerUtil.
 
@@ -13,7 +13,7 @@ public class ConnectionUtil { // Used to establish a connection to the SQL datab
         Properties properties = new Properties(); // Properties object is instantiated to store application.properties contents for processing.
         properties.load(inputStream); // Prepares credentials to be sent to the database.
 
-        Class.forName("org.postgresql.Driver"); // Initializes the Driver class to be connected to the SQL server as a liaison.
+        Class.forName("org.postgresql.Driver"); // Initializes the SQL server's driver into class form
         Connection connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("username"), properties.getProperty("password")); // Establishes connection with database using necessary URL and credentials.
 
         return connection; // Connection is returned for use in ServerUtil.
